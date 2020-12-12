@@ -1,4 +1,4 @@
-/* eslint max-classes-per-file: ["error", 4] */
+/* eslint max-classes-per-file: ["error", 5] */
 class BadRequestError extends Error {
   constructor(message) {
     super(message);
