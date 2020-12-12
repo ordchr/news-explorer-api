@@ -10,8 +10,8 @@ const auth = require('./middlewares/auth');
 const { PORT = 9001 } = process.env;
 const { MONGODB_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
 
-const users = require('./routes/users');
-const articles = require('./routes/articles');
+const index = require('./routes/index');
+
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { NotFoundError } = require('./modules/exceptions');
 
@@ -43,8 +43,7 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use('/users', users);
-app.use('/articles', articles);
+app.use('/', index);
 
 app.use((req, res, next) => {
   next(new NotFoundError('404 Not found'));
