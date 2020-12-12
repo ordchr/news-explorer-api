@@ -6,6 +6,13 @@ class BadRequestError extends Error {
   }
 }
 
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = 401;
+  }
+}
+
 class BadPermitionsError extends Error {
   constructor(message) {
     super(message);
@@ -32,4 +39,5 @@ module.exports = {
   BadPermitionsError,
   NotFoundError,
   AlreadyExistsError,
+  UnauthorizedError,
 };
