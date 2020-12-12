@@ -8,13 +8,14 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
 const { PORT = 9001 } = process.env;
+const { MONGODB_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
 
 const users = require('./routes/users');
 const articles = require('./routes/articles');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { NotFoundError } = require('./modules/exceptions');
 
-mongoose.connect('mongodb://localhost:27017/newsdb', {
+mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
