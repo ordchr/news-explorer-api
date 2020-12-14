@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
-const { PORT = 9001 } = process.env;
+const { PORT = 3000 } = process.env;
 const { MONGODB_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
 
 const index = require('./routes/index');

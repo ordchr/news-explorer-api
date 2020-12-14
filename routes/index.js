@@ -5,4 +5,4 @@ const articles = require('./articles');
 router.use('/users', users);
 router.use('/articles', articles);
 
-module.exports = router
+module.exports = router;
