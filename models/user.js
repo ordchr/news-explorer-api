@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function save(next) {
   if (!this.isModified('password')) return next();
   return bcrypt.hash(this.password, 10)
     .then((hash) => {
@@ -36,13 +36,12 @@ userSchema.pre('save', function (next) {
     .catch((err) => next(err));
 });
 
-userSchema.pre('findOneAndUpdate', function (next) {
+userSchema.pre('findOneAndUpdate', function findOneAndUpdate(next) {
   this.options.runValidators = true;
   next();
 });
 
-/* eslint func-names: ["error", "never"] */
-userSchema.statics.findUserByCredentials = function ({ email, password }) {
+userSchema.statics.findUserByCredentials = function findUserByCredentials({ email, password }) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {

@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const {
-  BadRequestError, NotFoundError, AlreadyExistsError, UnauthorizedError,
-} = require('../modules/exceptions');
+const { BadRequestError } = require('../modules/exceptions/BadRequestError');
+const { NotFoundError } = require('../modules/exceptions/NotFoundError');
+const { AlreadyExistsError } = require('../modules/exceptions/AlreadyExistsError');
+const { UnauthorizedError } = require('../modules/exceptions/UnauthorizedError');
 const { JWT_SECRET } = require('../modules/constant');
 
 module.exports.getCurrentUser = (req, res, next) => {
@@ -32,11 +33,10 @@ module.exports.createUser = (req, res, next) => {
     name, email, password,
   })
     .then(({
-      /* eslint no-shadow: 0 */
-      name, email,
+      resultName, resultEmail,
     }) => res.send({
       data: {
-        name, email,
+        resultName, resultEmail,
       },
     }))
     .catch((err) => {
