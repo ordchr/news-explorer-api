@@ -1,6 +1,5 @@
 const Article = require('../models/article');
 const BadPermitionsError = require('../modules/exceptions/BadPermitionsError');
-const NotFoundError = require('../modules/exceptions/NotFoundError');
 
 module.exports.createArticle = (req, res, next) => {
   const {
