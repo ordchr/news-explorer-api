@@ -1,6 +1,6 @@
 const Article = require('../models/article');
-const { BadRequestError } = require('./exceptions/BadRequestError');
-const { NotFoundError } = require('./exceptions/NotFoundError');
+const BadRequestError = require('./exceptions/BadRequestError');
+const NotFoundError = require('./exceptions/NotFoundError');
 
 const populateArticle = (req, res, next, articleId) => Article.findById(articleId)
   .then((article) => {

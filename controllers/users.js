@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { BadRequestError } = require('../modules/exceptions/BadRequestError');
-const { NotFoundError } = require('../modules/exceptions/NotFoundError');
-const { AlreadyExistsError } = require('../modules/exceptions/AlreadyExistsError');
-const { UnauthorizedError } = require('../modules/exceptions/UnauthorizedError');
-const { JWT_SECRET } = require('../modules/constant');
+const BadRequestError = require('../modules/exceptions/BadRequestError');
+const NotFoundError = require('../modules/exceptions/NotFoundError');
+const AlreadyExistsError = require('../modules/exceptions/AlreadyExistsError');
+const UnauthorizedError = require('../modules/exceptions/UnauthorizedError');
+const JWT_SECRET = require('../modules/constant');
 
 module.exports.getCurrentUser = (req, res, next) => {
   const { _id } = req.user;

@@ -13,7 +13,7 @@ const { MONGODB_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
 const index = require('./routes/index');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { NotFoundError } = require('./modules/exceptions/NotFoundError');
+const NotFoundError = require('./modules/exceptions/NotFoundError');
 
 mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
