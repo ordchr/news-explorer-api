@@ -3,6 +3,7 @@ const BadRequestError = require('./exceptions/BadRequestError');
 const NotFoundError = require('./exceptions/NotFoundError');
 
 const populateArticle = (req, res, next, articleId) => Article.findById(articleId)
+  .populate('owner')
   .then((article) => {
     if (article === null) {
       throw new NotFoundError('Нет статьи с таким id');

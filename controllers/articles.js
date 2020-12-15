@@ -21,7 +21,7 @@ module.exports.getArticles = (req, res, next) => {
 };
 
 module.exports.deleteArticle = (req, res, next) => {
-  if (req.article.owner.toString() === req.user._id) {
+  if (req.article.owner._id.toString() === req.user._id) {
     Article.findByIdAndRemove(req.article._id)
       .then((deletedCard) => res.status(200).send(deletedCard))
       .catch((err) => next(err));
