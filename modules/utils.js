@@ -1,9 +1,11 @@
 const Article = require('../models/article');
+const { BadRequestError } = require('./exceptions/BadRequestError');
+const { NotFoundError } = require('./exceptions/NotFoundError');
 
 const populateArticle = (req, res, next, articleId) => Article.findById(articleId)
   .then((article) => {
     if (article === null) {
-      res.status(404).send({ message: 'Нет статьи с таким id' });
+      throw new NotFoundError('Нет статьи с таким id');
     } else {
       req.article = article;
       next();
@@ -11,9 +13,9 @@ const populateArticle = (req, res, next, articleId) => Article.findById(articleI
   })
   .catch((err) => {
     if (err.name === 'CastError') {
-      res.status(400).send({ message: 'Ошибочный формат id' });
+      return next(new BadRequestError('Ошибочный формат id'));
     }
-    next(err);
+    return next(err);
   });
 
 const joiValidateUrl = (value) => {

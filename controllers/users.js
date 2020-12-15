@@ -18,9 +18,9 @@ module.exports.getCurrentUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Ошибочный формат id'));
+        return next(new BadRequestError('Ошибочный формат id'));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -41,10 +41,9 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
-        next(new AlreadyExistsError('Такой email уже зарегистрирован'));
-      } else {
-        next(err);
+        return next(new AlreadyExistsError('Такой email уже зарегистрирован'));
       }
+      return next(err);
     });
 };
 
