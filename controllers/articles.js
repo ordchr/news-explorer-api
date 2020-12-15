@@ -1,5 +1,6 @@
 const Article = require('../models/article');
 const BadPermitionsError = require('../modules/exceptions/BadPermitionsError');
+const NotFoundError = require('../modules/exceptions/NotFoundError');
 
 module.exports.createArticle = (req, res, next) => {
   const {
@@ -21,13 +22,11 @@ module.exports.getArticles = (req, res, next) => {
 };
 
 module.exports.deleteArticle = (req, res, next) => {
-  Article.findOneAndDelete({ _id: req.article._id, owner: req.user._id })
-    .then((article) => {
-      if (!article) {
-        next(new BadPermitionsError('Нельзя удалить статью другого пользователя'));
-      } else {
-        res.send(article);
-      }
-    })
-    .catch((err) => next(err));
+  if (req.article.owner.toString() === req.user._id) {
+    Article.findByIdAndRemove(req.article._id)
+      .then((deletedCard) => res.status(200).send(deletedCard))
+      .catch((err) => next(err));
+  } else {
+    next(new BadPermitionsError('Нельзя удалить статью другого пользователя'));
+  }
 };
