@@ -4,29 +4,23 @@ const articleSchema = new mongoose.Schema({
   keyword: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 50,
   },
   title: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 100,
   },
   text: {
     type: String,
     required: true,
-    minlength: 2,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
-    default: Date.now,
+    default: '',
   },
   source: {
     type: String,
     required: true,
-    minlength: 2,
   },
   link: {
     type: String,

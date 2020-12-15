@@ -13,11 +13,11 @@ router.get('/', getArticles);
 
 router.post('/', celebrate({
   body: Joi.object().keys({
-    keyword: Joi.string().min(2).max(50).required(),
-    title: Joi.string().min(2).max(100).required(),
-    text: Joi.string().min(2).required(),
-    date: Joi.date().required(),
-    source: Joi.string().custom(joiValidateUrl, 'validate source URL'),
+    keyword: Joi.string().required(),
+    title: Joi.string().required(),
+    text: Joi.string().required(),
+    date: Joi.string().required(),
+    source: Joi.string().required(),
     link: Joi.string().custom(joiValidateUrl, 'validate link URL'),
     image: Joi.string().custom(joiValidateUrl, 'validate image URL'),
   }),
