@@ -4,7 +4,7 @@ const BadRequestError = require('../modules/exceptions/BadRequestError');
 const NotFoundError = require('../modules/exceptions/NotFoundError');
 const AlreadyExistsError = require('../modules/exceptions/AlreadyExistsError');
 const UnauthorizedError = require('../modules/exceptions/UnauthorizedError');
-const JWT_SECRET = require('../modules/constant');
+const { JWT_SECRET } = require('../modules/constant');
 
 module.exports.getCurrentUser = (req, res, next) => {
   const { _id } = req.user;
@@ -32,11 +32,10 @@ module.exports.createUser = (req, res, next) => {
   User.create({
     name, email, password,
   })
-    .then(({
-      resultName, resultEmail,
-    }) => res.send({
+    .then((user) => res.send({
       data: {
-        resultName, resultEmail,
+        name: user.name,
+        email: user.email,
       },
     }))
     .catch((err) => {
