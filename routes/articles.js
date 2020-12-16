@@ -7,6 +7,12 @@ const {
 } = require('../controllers/articles');
 const { populateArticle } = require('../modules/utils');
 
+router.param('articleId', celebrate({
+  params: Joi.object().keys({
+    articleId: Joi.string().length(24).hex(),
+  }),
+}));
+
 router.param('articleId', populateArticle);
 
 router.get('/', getArticles);
@@ -23,10 +29,6 @@ router.post('/', celebrate({
   }),
 }), createArticle);
 
-router.delete('/:articleId', celebrate({
-  params: Joi.object().keys({
-    articleId: Joi.string().length(24).hex(),
-  }),
-}), deleteArticle);
+router.delete('/:articleId', deleteArticle);
 
 module.exports = router;
