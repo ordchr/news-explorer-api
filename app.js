@@ -1,9 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const { MONGODB_URL = 'mongodb://localhost:27017/newsdb' } = process.env;
 
 const index = require('./routes/index');
@@ -18,6 +19,8 @@ mongoose.connect(MONGODB_URL, {
 });
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(requestLogger);
